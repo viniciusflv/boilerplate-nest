@@ -1,0 +1,19 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type HelloWorldModel {
+  helloWorld: String!
+}
+
+type Query {
+  helloWorld: HelloWorldModel!
+}
+
+type Mutation {
+  setHelloWorld(message: String!): HelloWorldModel!
+}
+
+type Subscription {
+  helloWorldChanged: HelloWorldModel!
+}
