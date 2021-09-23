@@ -10,7 +10,7 @@ import { Logger } from '../../../common/decorators/logger.decorator';
 @Resolver(() => HelloWorldModel)
 export class HelloWorldResolver {
   constructor(
-    @Inject('PubSub')
+    @Inject(PubSub.name)
     private readonly pubSub: PubSub,
     private readonly helloWorldService: HelloWorldService,
   ) {}
@@ -22,6 +22,7 @@ export class HelloWorldResolver {
   }
 
   @Mutation(() => HelloWorldModel)
+  @Logger(HelloWorldResolver.name, 'atualizar o olá mundo')
   setHelloWorld(@Args('message', { type: () => String }) message: string) {
     const helloWorld: HelloWorldModel = {
       helloWorld: message,

@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { PubSubModule } from './pubsub.module';
 import { HelloWorldModule } from './hello-world/hello-world.module';
+import { ExceptionModule } from './exception.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { HelloWorldModule } from './hello-world/hello-world.module';
     }),
     HelloWorldModule,
     PubSubModule,
+    ExceptionModule,
   ],
 })
 export class AppModule {}

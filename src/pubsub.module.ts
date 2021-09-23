@@ -5,10 +5,10 @@ import { PubSub } from 'graphql-subscriptions';
 @Module({
   providers: [
     {
-      provide: 'PubSub',
+      provide: PubSub.name,
       useValue: new PubSub(),
     },
   ],
-  exports: ['PubSub'],
+  exports: [PubSub.name],
 })
 export class PubSubModule {}
