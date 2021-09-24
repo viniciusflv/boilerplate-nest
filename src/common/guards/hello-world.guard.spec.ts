@@ -15,7 +15,7 @@ describe('HelloWorldGuard', () => {
     const ctx: any = {
       switchToHttp: () => ({
         getRequest: () => ({
-          headers: { token: '456' },
+          headers: { authorization: '456' },
         }),
       }),
     };
@@ -29,7 +29,7 @@ describe('HelloWorldGuard', () => {
     const ctx: any = {
       switchToHttp: () => ({
         getRequest: () => ({
-          headers: { token: '123' },
+          headers: { authorization: 'Bearer 123' },
         }),
       }),
     };

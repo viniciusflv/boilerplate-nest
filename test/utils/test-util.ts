@@ -5,9 +5,10 @@ import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from 'nestjs-config';
 import { Observable, throwError } from 'rxjs';
 import { GraphQLModule } from '@nestjs/graphql';
-import { HttpException, ModuleMetadata } from '@nestjs/common';
+import { HttpException, ModuleMetadata, HttpModule } from '@nestjs/common';
 
 import { PubSubModule } from '../../src/pubsub.module';
+import { ExceptionModule } from '../../src/exception.module';
 
 export function mockSuccess<M>(mock: M): Observable<M> {
   return new Observable((subscribe) => {
@@ -42,7 +43,9 @@ export function createTestingModule(metadata: ModuleMetadata = {}) {
               modifyConfigName: (name) => name.replace('.config', ''),
             },
           ),
+          HttpModule,
           PubSubModule,
+          ExceptionModule,
         ],
         providers: [],
       } as ModuleMetadata,
