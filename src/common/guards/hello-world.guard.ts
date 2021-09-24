@@ -7,7 +7,7 @@ export class HelloWorldGuard implements CanActivate {
     ctx: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = ctx.switchToHttp().getRequest();
-    const token = request?.headers?.token;
-    return token === '123';
+    const token = request?.headers?.authorization;
+    return token === 'Bearer 123';
   }
 }
