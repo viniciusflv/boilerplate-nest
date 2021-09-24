@@ -52,7 +52,7 @@ describe('HelloWorld - API de olá mundo', () => {
 
       when(/^chamar o endpoint "(.*)"$/, async (endpoint) => {
         response = await request(app.getHttpServer()).get(endpoint).set({
-          token: '123',
+          authorization: 'Bearer 123',
         });
       });
 
@@ -75,7 +75,7 @@ describe('HelloWorld - API de olá mundo', () => {
           response = await request(app.getHttpServer())
             .post(endpoint)
             .set({
-              token: '123',
+              authorization: 'Bearer 123',
             })
             .send({
               operationName: null,
@@ -102,7 +102,7 @@ describe('HelloWorld - API de olá mundo', () => {
         response = await request(app.getHttpServer())
           .put(endpoint)
           .set({
-            token: '123',
+            authorization: 'Bearer 123',
           })
           .send(payload);
       });
@@ -126,7 +126,7 @@ describe('HelloWorld - API de olá mundo', () => {
           response = await request(app.getHttpServer())
             .post(endpoint)
             .set({
-              token: '123',
+              authorization: 'Bearer 123',
             })
             .send({
               operationName: null,
