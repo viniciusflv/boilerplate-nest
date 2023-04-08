@@ -2,18 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type HelloWorldModel {
-  helloWorld: String!
+type ModuleModel {
+  name: String!
+}
+
+type MutationModuleResponseModel {
+  id: String!
+  name: String!
 }
 
 type Query {
-  helloWorld: HelloWorldModel!
+  read(id: String!): ModuleModel!
 }
 
 type Mutation {
-  setHelloWorld(message: String!): HelloWorldModel!
+  create(data: MutationModuleModel!): MutationModuleResponseModel!
+}
+
+input MutationModuleModel {
+  name: String!
 }
 
 type Subscription {
-  helloWorldChanged: HelloWorldModel!
+  created: MutationModuleResponseModel!
 }

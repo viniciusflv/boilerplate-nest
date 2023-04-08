@@ -1,7 +1,9 @@
 {
+  "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
+    "deleteOutDir": true,
     "plugins": [
       {
         "name": "@nestjs/swagger/plugin",
@@ -9,10 +11,6 @@
           "introspectComments": true,
           "classValidatorShim": true
         }
-      },
-      {
-        "name": "@nestjs/graphql",
-        "options": { "introspectComments": true }
       }
     ]
   }

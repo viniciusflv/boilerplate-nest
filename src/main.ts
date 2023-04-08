@@ -1,32 +1,48 @@
-import { Logger } from '@nestjs/common';
-import { Logger as PinoLogger } from 'nestjs-pino';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
-  const logger = new Logger();
-  const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT || 5000;
-
-  logger.verbose(
-    `http://localhost:${port}`,
-    `Application Started - ${process.env.ENV}`,
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+    { cors: true },
   );
 
-  app.useLogger(app.get(PinoLogger));
+  app.useLogger(app.get(Logger));
 
-  const options = new DocumentBuilder()
-    .setTitle('BFF Hello World')
-    .setDescription('BFF responsável por demonstrar o NestJS')
+  const config = new DocumentBuilder()
+    .setTitle('Example')
+    .setDescription('API description')
     .setVersion('1.0')
+    .addBasicAuth()
     .addBearerAuth()
+    // .addServer('https://localhost:4000')
+    // .addServer('https://api-dev.com')
+    // .addServer('https://api-hom.com')
+    // .addServer('https://api.com')
     .build();
 
-  SwaggerModule.setup('/api', app, SwaggerModule.createDocument(app, options));
+  const document = SwaggerModule.createDocument(app, config);
 
-  await app.listen(port);
+  SwaggerModule.setup('api', app, document);
+
+  await app.listen(4000);
+
+  console.log(
+    JSON.stringify(
+      {
+        swagger: 'http://localhost:4000/api',
+        openapi: 'http://localhost:4000/api-json',
+      },
+      undefined,
+      2,
+    ),
+  );
 }
-
 bootstrap();

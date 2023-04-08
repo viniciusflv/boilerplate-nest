@@ -5,7 +5,5 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
-  },
-  "setupFiles": ["./utils/env.ts"],
-  "setupFilesAfterEnv": ["./mocks/msw/server.ts"]
+  }
 }
